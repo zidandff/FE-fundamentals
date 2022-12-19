@@ -6,10 +6,18 @@ const main = () => {
   const searchElement = document.querySelector("search-bar");
   const clubListElement = document.querySelector("club-list");
 
-  const onButtonSearchClicked = () => {
-    DataSource.searchClub(searchElement.value)
-      .then(renderResult)
-      .catch(fallbackResult);
+  // const onButtonSearchClicked = () => {
+  //   DataSource.searchClub(searchElement.value)
+  //     .then(renderResult)
+  //     .catch(fallbackResult);
+  // };
+  const onButtonSearchClicked = async () => {
+    try {
+      const result = await DataSource.searchClub(searchElement.value);
+      renderResult(result);
+    } catch(message){
+      fallbackResult(message);
+    }
   };
 
   const renderResult = (results) => {
